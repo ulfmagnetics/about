@@ -29,7 +29,7 @@
       </div>
 
       <div class='row'>
-        <div class='col-xs-8'>
+        <div class='col-xs-10 col-md-8'>
           <div class='jumbotron'>
             <p class='lead'>
               Please use the following form to make a payment.
@@ -39,56 +39,65 @@
               <span class='payment-errors'></span>
 
               <div class='form-group'>
-                <label for='input-amount-usd' class='col-md-4 control-label'>
+                <label for='input-amount-usd' class='col-xs-12 col-sm-6 col-md-4 control-label'>
                   Amount of Payment (USD)
                 </label>
-                <div class='col-md-4'>
-                  <input type='text' size='10' id='input-amount-usd' name='amount_usd' value='$'>
+                <div class='col-xs-10 col-sm-6 col-md-4'>
+                  <div class='input-group'>
+                    <div class='input-group-addon'>$</div>
+                    <input type='text' size='10' id='input-amount-usd' name='amount_usd' class='form-control'>
+                    <div class='input-group-addon'>.00</div>
+                  </div>
                 </div>
               </div>
 
               <div class='form-group'>
-                <label for='input-memo' class='col-md-4 control-label'>
+                <label for='input-memo' class='col-xs-12 col-sm-6 col-md-4 control-label'>
                   Memo (optional)
                 </label>
-                <div class='col-md-4'>
-                  <input type='text' size='30' id='input-memo' name='memo' placeholder='e.g. invoice number'>
+                <div class='col-xs-10 col-sm-6 col-md-6'>
+                  <input type='text' size='30' id='input-memo' name='memo' placeholder='e.g. invoice number' class='form-control'>
                 </div>
               </div>
 
               <div class='form-group'>
-                <label for='input-number' class='col-md-4 control-label'>
+                <label for='input-number' class='col-xs-12 col-sm-6 col-md-4 control-label'>
                   Card Number
                 </label>
-                <div class='col-md-4'>
-                  <input type='text' size='20' id='input-number' data-stripe='number'>
+                <div class='col-xs-10 col-sm-6 col-md-4'>
+                  <input type='text' size='20' id='input-number' data-stripe='number' class='form-control'>
                 </div>
               </div>
 
               <div class='form-group'>
-                <label for='input-expmonth' class='col-md-4 control-label'>
+                <label for='input-expmonth' class='col-xs-12 col-sm-6 col-md-4 control-label'>
                   Expiration (MM/YY)
                 </label>
-                <div class='col-md-4'>
-                  <input type='text' size='2' id='input-expmonth' data-stripe='exp_month'>
-                  <span>&nbsp;/&nbsp;</span>
-                  <input type='text' size='2' id='input-expyear' data-stripe='exp_year'>
+                <div class='col-xs-8 col-sm-6 col-md-3'>
+                  <div class='input-group'>
+                    <input type='text' size='2' id='input-expmonth' data-stripe='exp_month' class='form-control'>
+                    <div class='input-group-addon'>
+                      <span>&nbsp;/&nbsp;</span>
+                    </div>
+                    <input type='text' size='2' id='input-expyear' data-stripe='exp_year' class='form-control'>
+                  </div>
                 </div>
               </div>
 
               <div class='form-group'>
-                <label for='input-cvc' class='col-md-4 control-label'>
+                <label for='input-cvc' class='col-xs-12 col-sm-6 col-md-4 control-label'>
                   <span>CVC</span>
                 </label>
-                <div class='col-md-4'>
-                  <input type='text' size='4' id='input-cvc' data-stripe='cvc'>
+                <div class='col-xs-6 col-sm-4 col-md-2'>
+                  <input type='text' size='4' id='input-cvc' data-stripe='cvc' class='form-control'>
                 </div>
               </div>
 
 
               <div class='form-group'>
-                <div class='col-md-offset-4 col-md-4'>
+                <div class='col-xs-offset-0 col-sm-offset-6 col-md-offset-4 col-md-8'>
                   <input type='submit' class='btn btn-primary submit' value='Submit Payment'>
+                  <a href='index.html' class='btn btn-default'>Cancel</a>
                 </div>
               </div>
             </form>
