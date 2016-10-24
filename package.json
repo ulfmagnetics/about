@@ -1,0 +1,22 @@
+{
+  "name": "ulfmagnetics-about",
+  "version": "1.0.0",
+  "description": "Ulf Magnetics, Inc. Brochureware",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ulfmagnetics/about.git"
+  },
+  "author": "John Berry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ulfmagnetics/about/issues"
+  },
+  "homepage": "https://github.com/ulfmagnetics/about#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
