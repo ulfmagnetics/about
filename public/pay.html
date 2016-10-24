@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Ulf Magnetics, Inc. - Pay</title>
+
+    <!-- Bootstrap -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="about.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class='container'>
+      <div class='page-header'>
+        <h1>Ulf Magnetics, Inc. <small>established 2002</small></h1>
+        <h4>
+          Builders of interesting and occasionally
+          useful technology (mostly software.)
+        </h4>
+      </div>
+
+      <div class='row'>
+        <div class='col-xs-8'>
+          <div class='jumbotron'>
+            <p class='lead'>
+              Please use the following form to make a payment.
+            </p>
+
+            <form action="/charge" method="POST" id="payment-form">
+              <span class="payment-errors"></span>
+
+              <div class="form-row">
+                <label>
+                  <span>Amount of Payment (USD)</span>
+                  <input type="text" size="10" name="amount_usd" value="$" />
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>
+                  <span>Invoice Number (optional)</span>
+                  <input type="text" size="20" name="memo" />
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>
+                  <span>Card Number</span>
+                  <input type="text" size="20" data-stripe="number">
+                </label>
+              </div>
+
+              <div class="form-row">
+                <label>
+                  <span>Expiration (MM/YY)</span>
+                  <input type="text" size="2" data-stripe="exp_month">
+                </label>
+                <span> / </span>
+                <input type="text" size="2" data-stripe="exp_year">
+              </div>
+
+              <div class="form-row">
+                <label>
+                  <span>CVC</span>
+                  <input type="text" size="4" data-stripe="cvc">
+                </label>
+              </div>
+
+
+              <input type="submit" class="btn btn-primary submit" value="Submit Payment">
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+      <div class='page-footer'>
+        &copy; 2016 Ulf Magnetics, Inc. (no one receiving)
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script type="text/javascript">
+      Stripe.setPublishableKey('pk_test_eZxV6q80NOAWDuTgCR8tw6P5');
+      //Stripe.setPublishableKey('pk_live_V2VW90lkicPOQUvy7OzeL6cr');
+
+      $(function() {
+        var $form = $('#payment-form');
+        $form.submit(function(event) {
+          // Disable the submit button to prevent repeated clicks:
+          $form.find('.submit').prop('disabled', true);
+
+          // TODO validate amount of payment
+
+          // Request a token from Stripe:
+          Stripe.card.createToken($form, stripeResponseHandler);
+
+          // Prevent the form from being submitted:
+          return false;
+        });
+      });
+
+      function stripeResponseHandler(status, response) {
+        // Grab the form:
+        var $form = $('#payment-form');
+
+        if (response.error) { // Problem!
+
+          // Show the errors on the form:
+          $form.find('.payment-errors').text(response.error.message);
+          $form.find('.submit').prop('disabled', false); // Re-enable submission
+
+        } else { // Token was created!
+
+          // Get the token ID:
+          var token = response.id;
+
+          // Insert the token ID into the form so it gets submitted to the server:
+          $form.append($('<input type="hidden" name="stripeToken">').val(token));
+
+          // Submit the form:
+          $form.get(0).submit();
+        }
+      };
+    </script>
+  </body>
+</html>
