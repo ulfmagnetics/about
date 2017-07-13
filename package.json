@@ -1,6 +1,9 @@
 {
   "name": "ulfmagnetics-about",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.11.1"
+  },
   "description": "Ulf Magnetics, Inc. Brochureware",
   "main": "app.js",
   "scripts": {
